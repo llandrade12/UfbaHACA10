@@ -942,7 +942,6 @@ a, button {
       const video = document.getElementById('videoPlayer');
       if (video) {
         video.addEventListener('ended', () => {
-          alert('Obrigado por assistir ao depoimento.');
         });
       }
     });
@@ -999,10 +998,7 @@ a, button {
     // Inicializa o player
     updateVideo();
     
-    // Quando o vídeo terminar, mostrar mensagem
-    videoPlayer.addEventListener('ended', function() {
-      alert('Obrigado por assistir a este depoimento.');
-    });
+
   });
 </script>
 </body>
