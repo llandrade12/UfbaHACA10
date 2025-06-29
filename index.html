@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saúde que Liberta | HACA10</title>
+
+  <!-- Tailwind para estilos do botão -->
+  <script src="https://cdn.tailwindcss.com"></script>
+x   
+  <style>
+    :root {
+      --cinza-fundo: #f5f5f4;
+      --texto: #2e2e2e;
+      --destaque: #d9c3b0;
+      --contraste: #144545;
+      --borda: #a8a8a8;
+      --alerta: #764a4a;
+      
+      --text-size: 1rem;
+      --line-height: 1.5;
+      --letter-spacing: normal;
+      --font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--cinza-fundo);
+      color: var(--texto);
+      font-size: var(--text-size);
+      line-height: var(--line-height);
+      letter-spacing: var(--letter-spacing);
+      font-family: var(--font-family);
+    }
+
+    /* Cabeçalho */
+    header {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--borda);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo span {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--texto);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--contraste);
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--alerta);
+      outline: none;
+    }
+
+    /* Banner */
+    .banner {
+      background: url('banner.jpg') center/cover no-repeat;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: rgb(251, 251, 251);
+      position: relative;
+    }
+
+    .banner-text {
+      color: #ffffff;
+    }
+
+    .banner-overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      display: inline-block;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .banner h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--destaque);
+      color: #000000;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+      font-weight: bold;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background-color: #c4ae9e;
+      outline: none;
+    }
+
+    /* Seções comuns */
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto 3rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+
+    section.bg-light {
+      background: #e6e6e6;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--texto);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--contraste);
+      line-height: 1.6;
+    }
+
+    /* Cards para Seção 3 */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--cinza-fundo);
+      padding: 1.25rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--contraste);
+    }
+
+    .card svg {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      stroke: var(--alerta);
+      stroke-width: 2;
+    }
+
+    .card-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--texto);
+    }
+
+    .card-subtext {
+      font-size: 0.9rem;
+      color: var(--contraste);
+      margin-top: 0.3rem;
+    }
+
+    /* Seção 4 - Depoimentos */
+    .depoimento {
+      background: var(--cinza-fundo);
+      border-left: 6px solid var(--destaque);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 4px;
+    }
+
+    .depoimento p {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+      color: var(--contraste);
+    }
+
+    .depoimento .autor {
+      font-weight: bold;
+      color: var(--alerta);
+      margin-bottom: 0.3rem;
+    }
+
+    .depoimento a {
+      color: var(--alerta);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* Seção 5 - Lista de Recursos */
+    ul.recursos-list {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      color: var(--contraste);
+      font-size: 1rem;
+    }
+
+    ul.recursos-list li {
+      margin-bottom: 0.8rem;
+    }
+
+    ul.recursos-list a {
+      color: var(--alerta);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    ul.recursos-list a:hover,
+    ul.recursos-list a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Rodapé */
+    footer {
+      margin-top: 4rem;
+      padding: 2rem;
+      background-color: #f4ece4;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--borda);
+      color: var(--contraste);
+    }
+
+    /* Acessibilidade */
+    .high-contrast {
+      background-color: black !important;
+      color: white !important;
+    }
+
+    .high-contrast * {
+      background-color: black !important;
+      color: white !important;
+      border-color: yellow !important;
+    }
+
+    .deuteranopia {
+      filter: url('#deuteranopia');
+    }
+
+    .protanopia {
+      filter: url('#protanopia');
+    }
+
+    .tritanopia {
+      filter: url('#tritanopia');
+    }
+
+    .spacing-mode * {
+      letter-spacing: 0.1rem !important;
+      word-spacing: 0.3rem !important;
+      line-height: 2 !important;
+    }
+
+    .font-size-small {
+      font-size: calc(var(--text-size) * 0.8) !important;
+    }
+
+    .font-size-normal {
+      font-size: var(--text-size) !important;
+    }
+
+    .font-size-large {
+      font-size: calc(var(--text-size) * 1.2) !important;
+    }
+
+    .font-size-xlarge {
+      font-size: calc(var(--text-size) * 1.5) !important;
+    }
+
+    /* Estilos específicos para o botão de acessibilidade */
+    #accessibility-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      transform: translateZ(0);
+    }
+
+    #accessibility-container, 
+    #accessibility-container * {
+      filter: none !important;
+      transform: none !important;
+      will-change: transform;
+    }
+
+    #accessibilityPanel {
+      transition: all 0.3s ease;
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      right: 0;
+      bottom: 100%;
+      margin-bottom: 10px;
+      width: 280px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    #accessibilityPanel.open {
+      max-height: 500px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Container do player */
+    .video-player-wrapper {
+      max-width: 720px;
+      margin: 2rem auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* Vídeo responsivo */
+    .video-player-wrapper video {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    /* Estilo dos depoimentos */
+    .depoimento {
+      max-width: 720px;
+      margin: 1rem auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--texto);
+    }
+
+    .depoimento .autor {
+      font-weight: bold;
+      margin-top: 0.5rem;
+      color: var(--contraste);
+    }
+
+    .depoimento a {
+      color: var(--destaque);
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    .depoimento a:hover,
+    .depoimento a:focus {
+      color: var(--alerta);
+      outline: none;
+    }
+
+    /* Wrapper para conteúdo principal */
+    #main-content-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botão de Acessibilidade Flutuante - Colocado no início do body -->
+  <div id="accessibility-container">
+    <button id="accessibilityToggle" class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300" aria-label="Alternar opções de acessibilidade" aria-expanded="false" aria-controls="accessibilityPanel">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+    </button>
+
+    <div id="accessibilityPanel" class="accessibility-panel" role="region" aria-label="Painel de opções de acessibilidade">
+      <div class="p-4">
+        <h3 class="font-bold text-lg mb-3 text-gray-800">Opções de Acessibilidade</h3>
+
+        <div class="mb-4">
+          <h4 class="font-medium mb-2 text-gray-700">Tamanho do Texto</h4>
+          <div class="flex space-x-2">
+            <button data-size="small" class="font-size-btn flex-1 py-1 px-3 text-sm bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">A-</button>
+            <button data-size="normal" class="font-size-btn flex-1 py-1 px-3 text-sm bg-blue-100 hover:bg-blue-200 rounded" aria-pressed="true">A</button>
+            <button data-size="large" class="font-size-btn flex-1 py-1 px-3 text-sm bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">A+</button>
+            <button data-size="xlarge" class="font-size-btn flex-1 py-1 px-3 text-sm bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">A++</button>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="font-medium mb-2 text-gray-700">Contraste</h4>
+          <button id="contrastBtn" class="w-full py-2 px-4 text-left rounded hover:bg-gray-100 flex items-center" aria-pressed="false" aria-label="Alternar alto contraste">
+            <span class="flex-1">Alto Contraste</span>
+            <svg id="contrastIcon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="font-medium mb-2 text-gray-700">Modo Daltonismo</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <button data-mode="deuteranopia" class="color-mode-btn py-1 px-2 text-xs bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">Deuteran.</button>
+            <button data-mode="protanopia" class="color-mode-btn py-1 px-2 text-xs bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">Protan.</button>
+            <button data-mode="tritanopia" class="color-mode-btn py-1 px-2 text-xs bg-gray-200 hover:bg-gray-300 rounded" aria-pressed="false">Tritan.</button>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <h4 class="font-medium mb-2 text-gray-700">Espaçamento</h4>
+          <button id="spacingBtn" class="w-full py-2 px-4 text-left rounded hover:bg-gray-100 flex items-center" aria-pressed="false" aria-label="Alternar espaçamento ampliado">
+            <span class="flex-1">Ampliar espaçamento</span>
+            <svg id="spacingIcon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"></path>
+            </svg>
+          </button>
+        </div>
+
+        <button id="resetBtn" class="w-full mt-4 py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-sm font-medium" aria-label="Redefinir configurações de acessibilidade">
+          Redefinir Configurações
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal - Tudo dentro deste wrapper -->
+  <div id="main-content-wrapper">
+    <!-- Cabeçalho -->
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="Logo UFBA" />
+        <span>UFBA | HACA10</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#problema">O Problema</a></li>
+          <li><a href="#dados">Dados Reais</a></li>
+          <li><a href="#vozes">Vozes Invisíveis</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Banner -->
+    <section id="inicio" class="banner">
+      <div class="banner-overlay">
+        <h1>Saúde que Liberta: <br>Um Direito que não se Apaga com as Grades</h1>
+        <p class="banner-text"></p>O acesso à saúde ginecológica e materna é um direito humano. No cárcere feminino, porém, esse direito é invisibilizado.</p>
+        <p class="banner-text">Conheça dados, depoimentos e formas de enfrentamento.</p>
+        <a href="#problema" class="btn">Saiba mais</a>
+      </div>
+    </section>
+
+    <!-- Seção 1: O Problema -->
+    <section id="problema" aria-labelledby="titulo-problema">
+      <h2 id="titulo-problema">O Problema:</h2>
+      <p>O sistema prisional brasileiro historicamente estruturado para homens, não está preparado para garantir os direitos básicos das mulheres encarceradas, especialmente em saúde ginecológica e materna. Isso causa invisibilidade, negligência e violações graves que afetam a dignidade, a saúde física e mental dessas mulheres e suas famílias.</p>
+    </section>
+
+    <!-- Seção 3: Dados e Infográficos -->
+    <section id="dados" class="bg-light" aria-labelledby="titulo-dados">
+      <h2 id="titulo-dados">Dados e Infográficos</h2><br>
+      <p>Nos últimos anos, o número de mulheres encarceradas no Brasil cresceu de forma alarmante. A maioria dessas mulheres é jovem, negra, mãe e foi presa por crimes não violentos, como tráfico de drogas em pequena escala. Muitas já estavam grávidas no momento da prisão, um dado que revela a interseção entre desigualdade social, abandono estatal e encarceramento em massa.</p><br>
+      <p>O sistema prisional brasileiro, historicamente estruturado para homens, não está preparado para garantir os direitos básicos das mulheres. Isso se agrava quando se fala da saúde ginecológica e materna. É comum a falta de atendimento médico adequado, ausência de absorventes, ausência de pré-natal e partos realizados sem acompanhante, violando a Lei do Acompanhante (Lei nº 11.108/2005). Muitas mulheres são algemadas durante o parto, o que fere normas internacionais de direitos humanos.</p><br>
+      <p>Além disso, o ambiente carcerário impõe restrições à dignidade da mulher, afetando não apenas sua saúde física, mas também sua saúde mental, autonomia e maternidade. O nascimento atrás das grades não é apenas um dado estatístico, é a expressão concreta de um sistema que desumaniza e invisibiliza corpos femininos vulnerabilizados.</p>
+      <p>O cárcere, que deveria restringir apenas a liberdade de ir e vir, acaba restringindo também o acesso à saúde, à dignidade e aos direitos mais básicos.</p><br>
+
+      <h3>O que dizem os números?</h3>
+      <div class="cards-grid" role="list">
+        <!-- Card 1 -->
+        <article class="card" role="listitem" aria-label="+37 mil mulheres encarceradas no Brasil (2023)">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8c-3 0-5 3-5 5a5 5 0 0010 0c0-2-2-5-5-5z" />
+            <path d="M12 12v4" />
+          </svg>
+          <div>
+            <p class="card-text">+37 mil</p>
+            <p class="card-subtext">mulheres encarceradas no Brasil (2023)</p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" role="listitem" aria-label="8 em cada 10 mulheres grávidas no momento da prisão">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M8 12h8" />
+          </svg>
+          <div>
+            <p class="card-text">8 em cada 10</p>
+            <p class="card-subtext">mulheres grávidas no momento da prisão</p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" role="listitem" aria-label="Falta de acesso a ginecologista em 2/3 das unidades prisionais femininas">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+            <path d="M4 12h16M4 6h16M4 18h16" />
+          </svg>
+          <div>
+            <p class="card-text">2/3 das unidades</p>
+            <p class="card-subtext">sem acesso a ginecologista</p>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card" role="listitem" aria-label="Violação da Lei nº 11.108/2005 (Lei do acompanhante no parto) em diversos presídios">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+          <div>
+            <p class="card-text">Violação da Lei nº 11.108/2005</p>
+            <p class="card-subtext">Lei do acompanhante no parto em diversos presídios</p>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="card" role="listitem" aria-label="Ausência de absorventes, consultas pré-natal e partos humanizados">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <div>
+            <p class="card-text">Ausência de absorventes, consultas pré-natal e partos humanizados</p>
+          </div>
+        </article>
+      </div>
+    </section>
+<!-- Seção 4: Vozes Invisíveis -->
+<section id="vozes" aria-labelledby="titulo-vozes" style="padding: 3rem 2rem;">
+  <h2 id="titulo-vozes">Vozes Invisíveis</h2>
+
+  <!-- Player de vídeo com controles de navegação -->
+  <div class="video-container" style="max-width: 720px; margin: 2rem auto;">
+    <!-- Player de vídeo -->
+    <div class="video-player-wrapper">
+      <video id="videoPlayer" width="100%" controls preload="metadata" style="border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);">
+        <source src="video-depoimento1.mp4" type="video/mp4" />
+        Seu navegador não suporta a reprodução de vídeo.
+      </video>
+    </div>
+    
+    <!-- Controles de navegação -->
+    <div class="video-controls" style="display: flex; justify-content: space-between; margin-top: 1rem;">
+      <button id="prevBtn" class="nav-btn" style="padding: 0.5rem 1rem; background-color: var(--destaque); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        &larr; Anterior
+      </button>
+      <span id="videoCounter" style="align-self: center; font-weight: bold;">1/4</span>
+      <button id="nextBtn" class="nav-btn" style="padding: 0.5rem 1rem; background-color: var(--destaque); color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        Próximo &rarr;
+      </button>
+    </div>
+  </div>
+
+  <!-- Depoimentos -->
+  <article class="depoimento" aria-label="Depoimento de Érica Paranhos" style="max-width: 720px; margin: 1rem auto; background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <p>“O normal é parir algemada. Como o meu parto foi cesariana, o médico teve de pedir pra tirar as algemas, para que eu pudesse tomar a anestesia. Depois de parir fui algemada pelo pé e pela mão.”</p>
+    <p class="autor" style="font-weight: bold; margin-top: 0.5rem;">Érica Paranhos – Conjunto Penal Feminino de Salvador</p>
+    <a href="https://www.jusbrasil.com.br/artigos/encarceradas-no-conjunto-penal-feminino-mulheres-sofrem-para-exercer-a-maternidade-na-prisao" target="_blank" rel="noopener noreferrer" style="color: #d9c3b0; text-decoration: underline;">Leia mais</a>
+  </article>
+
+  <article class="depoimento" aria-label="Relato 'A menina que não conhecia as estrelas'" style="max-width: 720px; margin: 1rem auto; background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <p>Relato divulgado na revista SciELO sobre crianças nascidas na PF da Mata Escura, Salvador: “Luiza ficou cinco anos presa com a mãe… ela não conhecia o céu à noite, assim como não conhecia cachorro, árvore, carro, homem, rua…”</p>
+    <a href="https://www.scielo.br/j/rdgv/a/qHnWZrVyx7xV9DQwr97rdZQ" target="_blank" rel="noopener noreferrer" style="color: #d9c3b0; text-decoration: underline;">Leia mais</a>
+  </article>
+</section>
+
+    <!-- Seção 5: Recursos e Acesso a Direitos -->
+    <section id="recursos" class="bg-light" aria-labelledby="titulo-recursos">
+      <h2 id="titulo-recursos">Informação também é cuidado</h2><br>
+      <p>Para enfrentar os desafios apresentados, algumas organizações e iniciativas têm atuado na defesa dos direitos das mulheres encarceradas, promovendo assistência jurídica, social e de saúde. Conheça alguns recursos e instituições que você pode procurar ou apoiar:</p><br>
+      <ul class="recursos-list">
+        <li><a href="https://www.conectas.org/" target="_blank" rel="noopener noreferrer">Conectas Direitos Humanos</a> – Organização que atua em defesa dos direitos humanos no Brasil.</li>
+        <li><a href="https://anpcon.org.br/" target="_blank" rel="noopener noreferrer">ANPCON (Associação Nacional dos Centros de Promoção da Saúde no Sistema Prisional)</a> – Trabalho focado em saúde prisional.</li>
+        <li><a href="https://www.prisonpolicy.org/" target="_blank" rel="noopener noreferrer">Prison Policy Initiative</a> – Instituto que fornece dados e pesquisas sobre encarceramento.</li>
+        <li><a href="https://www.maternalhealthtaskforce.org/" target="_blank" rel="noopener noreferrer">Maternal Health Task Force</a> – Iniciativa internacional para melhorar a saúde materna.</li>
+        <li><a href="https://saude.gov.br/acoes-e-programas/saude-do-povo-privado-de-liberdade" target="_blank" rel="noopener noreferrer">Ministério da Saúde - Saúde do Povo Privado de Liberdade</a> – Programa de políticas públicas para a saúde em prisões.</li>
+      </ul>
+      <p>Você também pode ajudar divulgando essas informações e apoiando campanhas por uma política prisional que respeite os direitos humanos das mulheres.</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      <p>Universidade Federal da Bahia – UFBA | HACA10 – Site educativo sem fins lucrativos | Salvador – BA | 2025</p>
+    </footer>
+  </div>
+
+  <!-- Filtros SVG para daltonismo -->
+  <svg xmlns="http://www.w3.org/2000/svg" height="0" width="0" aria-hidden="true" focusable="false">
+    <filter id="deuteranopia">
+      <feColorMatrix type="matrix" values="0.625, 0.375, 0,   0, 0
+                                          0.7,   0.3,   0,   0, 0
+                                          0,     0.3,   0.7, 0, 0
+                                          0,     0,     0,   1, 0"/>
+    </filter>
+    <filter id="protanopia">
+      <feColorMatrix type="matrix" values="0.567, 0.433, 0,     0, 0
+                                          0.558, 0.442, 0,     0, 0
+                                          0,     0.242, 0.758, 0, 0
+                                          0,     0,     0,     1, 0"/>
+    </filter>
+    <filter id="tritanopia">
+      <feColorMatrix type="matrix" values="0.95,  0.05,  0,     0, 0
+                                          0,     0.433, 0.567, 0, 0
+                                          0,     0.475, 0.525, 0, 0
+                                          0,     0,     0,     1, 0"/>
+    </filter>
+  </svg>
+
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('accessibilityToggle');
+  const panel = document.getElementById('accessibilityPanel');
+  const container = document.getElementById('accessibility-container');
+  const contrastBtn = document.getElementById('contrastBtn');
+  const spacingBtn = document.getElementById('spacingBtn');
+  const fontSizeBtns = document.querySelectorAll('.font-size-btn');
+  const colorModeBtns = document.querySelectorAll('.color-mode-btn');
+  const resetBtn = document.getElementById('resetBtn');
+  const mainContent = document.getElementById('main-content-wrapper');
+
+  // Toggle panel visibility
+  toggleBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    panel.classList.toggle('open');
+    const isOpen = panel.classList.contains('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close panel when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!container.contains(e.target) && !toggleBtn.contains(e.target)) {
+      panel.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // Configurações de acessibilidade
+  let contrastActive = false;
+  let spacingActive = false;
+  let currentColorMode = null;
+  let currentFontSize = 'normal';
+
+  // Contrast toggle
+  contrastBtn.addEventListener('click', function() {
+    contrastActive = !contrastActive;
+    contrastBtn.setAttribute('aria-pressed', contrastActive);
+    if (contrastActive) {
+      document.body.classList.add('high-contrast');
+    } else {
+      document.body.classList.remove('high-contrast');
+    }
+  });
+
+  // Spacing toggle
+  spacingBtn.addEventListener('click', function() {
+    spacingActive = !spacingActive;
+    spacingBtn.setAttribute('aria-pressed', spacingActive);
+    if (spacingActive) {
+      document.body.classList.add('spacing-mode');
+    } else {
+      document.body.classList.remove('spacing-mode');
+    }
+  });
+
+  // Font size buttons
+  fontSizeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.body.classList.remove(
+        'font-size-small', 
+        'font-size-normal', 
+        'font-size-large', 
+        'font-size-xlarge'
+      );
+
+      const size = this.getAttribute('data-size');
+      currentFontSize = size;
+      
+      // Corrigido: usando concatenação de string em vez de template literal mal formado
+      document.body.classList.add('font-size-' + size);
+
+      // Update active state
+      fontSizeBtns.forEach(b => {
+        b.classList.remove('bg-blue-100', 'hover:bg-blue-200');
+        b.classList.add('bg-gray-200', 'hover:bg-gray-300');
+        b.setAttribute('aria-pressed', 'false');
+      });
+
+      this.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+      this.classList.add('bg-blue-100', 'hover:bg-blue-200');
+      this.setAttribute('aria-pressed', 'true');
+    });
+  });
+
+  // Color mode buttons
+  colorModeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (currentColorMode) {
+        document.body.classList.remove(currentColorMode);
+        // Remove aria-pressed from previous
+        const prevBtn = Array.from(colorModeBtns).find(b => b.getAttribute('data-mode') === currentColorMode);
+        if (prevBtn) prevBtn.setAttribute('aria-pressed', 'false');
+      }
+
+      const mode = this.getAttribute('data-mode');
+
+      if (currentColorMode === mode) {
+        currentColorMode = null;
+        this.setAttribute('aria-pressed', 'false');
+      } else {
+        currentColorMode = mode;
+        document.body.classList.add(mode);
+        this.setAttribute('aria-pressed', 'true');
+      }
+    });
+  });
+
+  // Reset button
+  resetBtn.addEventListener('click', function() {
+    // Reset contrast
+    contrastActive = false;
+    document.body.classList.remove('high-contrast');
+    contrastBtn.setAttribute('aria-pressed', 'false');
+
+    // Reset spacing
+    spacingActive = false;
+    document.body.classList.remove('spacing-mode');
+    spacingBtn.setAttribute('aria-pressed', 'false');
+
+    // Reset font size
+    document.body.classList.remove(
+      'font-size-small', 
+      'font-size-normal', 
+      'font-size-large', 
+      'font-size-xlarge'
+    );
+    document.body.classList.add('font-size-normal');
+    
+    fontSizeBtns.forEach(b => {
+      b.classList.remove('bg-blue-100', 'hover:bg-blue-200');
+      b.classList.add('bg-gray-200', 'hover:bg-gray-300');
+      b.setAttribute('aria-pressed', 'false');
+      if (b.getAttribute('data-size') === 'normal') {
+        b.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+        b.classList.add('bg-blue-100', 'hover:bg-blue-200');
+        b.setAttribute('aria-pressed', 'true');
+      }
+    });
+
+    // Reset color mode
+    if (currentColorMode) {
+      document.body.classList.remove(currentColorMode);
+      const prevBtn = Array.from(colorModeBtns).find(b => b.getAttribute('data-mode') === currentColorMode);
+      if (prevBtn) prevBtn.setAttribute('aria-pressed', 'false');
+      currentColorMode = null;
+    }
+
+    // Close panel
+    panel.classList.remove('open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.getElementById('videoPlayer');
+      if (video) {
+        video.addEventListener('ended', () => {
+          alert('Obrigado por assistir ao depoimento.');
+        });
+      }
+    });
+  </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const videos = [
+      { src: "depoimento1.mp4", title: "Depoimento 1" },
+      { src: "depoimento2.mp4", title: "Depoimento 2" },
+      { src: "depoimento3.mp4", title: "Depoimento 3" },
+      { src: "depoimento4.mp4", title: "Depoimento 4" }
+    ];
+    
+    const videoPlayer = document.getElementById('videoPlayer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const videoCounter = document.getElementById('videoCounter');
+    
+    let currentVideoIndex = 0;
+    
+    // Atualiza o player com o vídeo atual
+    function updateVideo() {
+      videoPlayer.src = videos[currentVideoIndex].src;
+      videoCounter.textContent = `${currentVideoIndex + 1}/${videos.length}`;
+      
+      // Desabilita/abilita botões conforme necessário
+      prevBtn.disabled = currentVideoIndex === 0;
+      nextBtn.disabled = currentVideoIndex === videos.length - 1;
+      
+      // Estiliza botões desabilitados
+      prevBtn.style.opacity = prevBtn.disabled ? "0.5" : "1";
+      nextBtn.style.opacity = nextBtn.disabled ? "0.5" : "1";
+      prevBtn.style.cursor = prevBtn.disabled ? "not-allowed" : "pointer";
+      nextBtn.style.cursor = nextBtn.disabled ? "not-allowed" : "pointer";
+    }
+    
+    // Event listeners para os botões
+    prevBtn.addEventListener('click', function() {
+      if (currentVideoIndex > 0) {
+        currentVideoIndex--;
+        updateVideo();
+        videoPlayer.play();
+      }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+      if (currentVideoIndex < videos.length - 1) {
+        currentVideoIndex++;
+        updateVideo();
+        videoPlayer.play();
+      }
+    });
+    
+    // Inicializa o player
+    updateVideo();
+    
+    // Quando o vídeo terminar, mostrar mensagem
+    videoPlayer.addEventListener('ended', function() {
+      alert('Obrigado por assistir a este depoimento.');
+    });
+  });
+</script>
+</body>
+</html>
